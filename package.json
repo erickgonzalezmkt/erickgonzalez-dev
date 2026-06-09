@@ -12,7 +12,6 @@
     "@base-ui/react": "^1.5.0",
     "@fontsource-variable/dm-sans": "^5.2.8",
     "@gsap/react": "^2.1.2",
-    "@next/swc-win32-x64-msvc": "^16.2.8",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
     "class-variance-authority": "^0.7.1",
