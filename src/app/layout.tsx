@@ -23,6 +23,12 @@ const headingFont = DM_Sans({
   preload: true,
 })
 
+export const viewport = {
+  themeColor: '#030712',
+  width: 'device-width',
+  initialScale: 1,
+}
+
 export const metadata: Metadata = {
   title: {
     default: 'Erick Gonzalez | Technology Partner — Web, Automation & Growth',
@@ -96,7 +102,6 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
     apple: '/apple-icon.png',
   },
-  themeColor: '#030712',
   manifest: '/manifest.json',
 }
 
@@ -112,12 +117,6 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* Preconnect to critical origins */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
