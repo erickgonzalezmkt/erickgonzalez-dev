@@ -1,7 +1,6 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { Navigation } from '@/components/Navigation'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { ServicesSection } from '@/components/sections/ServicesSection'
 import { StackSection } from '@/components/sections/StackSection'
@@ -12,7 +11,6 @@ import { CtaSection } from '@/components/sections/CtaSection'
 import { Footer } from '@/components/Footer'
 
 // SmoothScroll y MagneticCursor se cargan solo en cliente con dynamic import
-// para evitar errores de SSR con Lenis
 const SmoothScroll = dynamic(
   () => import('@/components/effects/SmoothScroll').then((m) => ({ default: m.SmoothScroll })),
   { ssr: false }
@@ -28,16 +26,13 @@ export default function Home() {
     <>
       <MagneticCursor />
       <SmoothScroll>
-        <Navigation />
-        <main className="relative">
-          <HeroSection />
-          <ServicesSection />
-          <StackSection />
-          <CortexSection />
-          <PricingSection />
-          <FaqSection />
-          <CtaSection />
-        </main>
+        <HeroSection />
+        <ServicesSection />
+        <StackSection />
+        <CortexSection />
+        <PricingSection />
+        <FaqSection />
+        <CtaSection />
         <Footer />
       </SmoothScroll>
     </>

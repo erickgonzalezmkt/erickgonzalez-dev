@@ -4,7 +4,7 @@ const cspHeader = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline';
   style-src 'self' 'unsafe-inline';
-  img-src 'self' blob: data:;
+  img-src 'self' blob: data: https://ik.imagekit.io https://tailark.com https://html.tailus.io;
   font-src 'self' data: fonts.gstatic.com;
   connect-src 'self' https://fonts.gstatic.com;
   frame-src 'none';
@@ -66,6 +66,11 @@ const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+    remotePatterns: [
+      { protocol: 'https', hostname: 'ik.imagekit.io' },
+      { protocol: 'https', hostname: 'tailark.com' },
+      { protocol: 'https', hostname: 'html.tailus.io' },
+    ],
   },
 
   // Compress with gzip/brotli
