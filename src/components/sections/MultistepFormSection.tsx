@@ -64,8 +64,22 @@ export function MultistepFormSection() {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsSubmitting(true)
+
+    // Enviar email primero
+    try {
+      await fetch('/api/send-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+    } catch (err) {
+      console.error('Error sending email:', err)
+      // No bloqueamos — el lead se envía igual por WhatsApp
+    }
+
+    // Abrir WhatsApp con resumen
     const message = encodeURIComponent(
       `Hola Erick! Soy ${formData.name} de ${formData.company || 'mi empresa'}.` +
       `\n\n📧 ${formData.email}` +
@@ -76,6 +90,7 @@ export function MultistepFormSection() {
       `\n📝 Detalles: ${formData.details || 'Sin detalles'}`
     )
     window.open(`https://wa.me/584120198300?text=${message}`, '_blank')
+
     setTimeout(() => {
       setIsSubmitting(false)
       setSubmitted(true)
