@@ -5,7 +5,7 @@ import { HeroSection } from '@/components/sections/HeroSection'
 import { ServicesSection } from '@/components/sections/ServicesSection'
 import { StackSection } from '@/components/sections/StackSection'
 import { CortexSection } from '@/components/sections/CortexSection'
-import { PricingSection } from '@/components/sections/PricingSection'
+import { BentoPricing } from '@/components/sections/BentoPricing'
 import { FaqSection } from '@/components/sections/FaqSection'
 import { CtaSection } from '@/components/sections/CtaSection'
 import { Footer } from '@/components/Footer'
@@ -30,7 +30,7 @@ export default function Home() {
         <ServicesSection />
         <StackSection />
         <CortexSection />
-        <PricingSection />
+        <BentoPricing />
         <FaqSection />
         <CtaSection />
         <Footer />
