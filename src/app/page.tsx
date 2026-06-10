@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { ServicesSection } from '@/components/sections/ServicesSection'
 import { StackSection } from '@/components/sections/StackSection'
-import { CortexSection } from '@/components/sections/CortexSection'
+import { MultistepFormSection } from '@/components/sections/MultistepFormSection'
 import { BentoPricing } from '@/components/sections/BentoPricing'
 import { FaqSection } from '@/components/sections/FaqSection'
 import { CtaSection } from '@/components/sections/CtaSection'
@@ -29,7 +29,7 @@ export default function Home() {
         <HeroSection />
         <ServicesSection />
         <StackSection />
-        <CortexSection />
+        <MultistepFormSection />
         <BentoPricing />
         <FaqSection />
         <CtaSection />

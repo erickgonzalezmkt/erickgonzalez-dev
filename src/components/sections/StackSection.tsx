@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { motion } from 'motion/react'
 import { techStack, type TechItem } from '@/data/stack'
+import { TechIcon } from '@/components/ui/tech-icons'
 import { Badge } from '@/components/ui/badge'
 
 const categoryLabels: Record<TechItem['category'], string> = {
@@ -16,54 +17,30 @@ const categoryLabels: Record<TechItem['category'], string> = {
 const categoryColors: Record<TechItem['category'], string> = {
   frontend: 'border-brand/30 text-brand',
   backend: 'border-emerald-500/30 text-emerald-400',
-  automation: 'border-accent/30 text-accent',
-  infra: 'border-amber-500/30 text-amber-400',
+  automation: 'border-amber-500/30 text-amber-400',
+  infra: 'border-purple-500/30 text-purple-400',
 }
 
 function TechCard({ tech, index }: { tech: TechItem; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null)
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width - 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5
-    gsap.to(cardRef.current, {
-      rotateX: y * -10,
-      rotateY: x * 10,
-      duration: 0.5,
-      ease: 'power2.out',
-    })
-  }
-
-  const handleMouseLeave = () => {
-    gsap.to(cardRef.current, {
-      rotateX: 0,
-      rotateY: 0,
-      duration: 0.5,
-      ease: 'power2.out',
-    })
-  }
-
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.85 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.4, delay: index * 0.03 }}
-      style={{ perspective: '600px' }}
+      initial={{ opacity: 0, y: 20, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: '-30px' }}
+      transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
     >
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="tech-card group cursor-default rounded-xl border border-border-subtle bg-surface/30 backdrop-blur-sm px-5 py-4 flex items-center justify-center hover:border-brand/20 hover:bg-surface-hover/30 transition-all duration-300"
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-        <span
-          className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors"
-          style={{ transform: 'translateZ(10px)' }}
-        >
+      <div className="group relative flex cursor-default items-center gap-3 rounded-xl border border-foreground/10 bg-background/50 px-4 py-3 backdrop-blur-sm transition-all duration-300 hover:border-brand/30 hover:bg-brand/[0.04] hover:shadow-[0_0_20px_-4px_rgba(37,99,235,0.15)]">
+        {/* Icon */}
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center">
+          <TechIcon
+            name={tech.name}
+            className="h-6 w-6 text-foreground/60 transition-colors duration-300 group-hover:text-brand"
+          />
+        </div>
+
+        {/* Name */}
+        <span className="text-sm font-medium text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
           {tech.name}
         </span>
       </div>
@@ -91,20 +68,20 @@ export function StackSection() {
     <section
       ref={sectionRef}
       id="stack"
-      className="relative py-32 px-6"
+      className="relative py-24 px-6"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background to-background/50 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
-        <div className="stack-header text-center mb-16">
+        <div className="stack-header text-center mb-14">
           <Badge
             variant="outline"
             className="stack-label mb-4 border-emerald-500/30 text-emerald-400"
           >
             Tech Stack
           </Badge>
-          <h2 className="stack-title text-4xl sm:text-5xl font-heading font-black tracking-tight">
+          <h2 className="stack-title text-4xl sm:text-5xl font-heading font-black tracking-tight text-foreground">
             Tecnología{' '}
             <span className="text-brand">de clase mundial.</span>
           </h2>
@@ -114,27 +91,28 @@ export function StackSection() {
           </p>
         </div>
 
-        {/* Category tabs */}
-        <div className="space-y-12">
-          {categories.map((category) => (
-            <div key={category}>
-              <div className="flex items-center gap-3 mb-5">
-                <span
-                  className={`text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full border ${categoryColors[category]}`}
-                >
-                  {categoryLabels[category]}
-                </span>
-                <div className="flex-1 h-px bg-border-subtle" />
-              </div>
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
-                {techStack
-                  .filter((t) => t.category === category)
-                  .map((tech, i) => (
+        {/* Category groups */}
+        <div className="space-y-10">
+          {categories.map((category) => {
+            const items = techStack.filter((t) => t.category === category)
+            return (
+              <div key={category}>
+                <div className="flex items-center gap-3 mb-4">
+                  <span
+                    className={`text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full border ${categoryColors[category]}`}
+                  >
+                    {categoryLabels[category]}
+                  </span>
+                  <div className="flex-1 h-px bg-foreground/5" />
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
+                  {items.map((tech, i) => (
                     <TechCard key={tech.name} tech={tech} index={i} />
                   ))}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

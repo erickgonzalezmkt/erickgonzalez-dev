@@ -184,7 +184,7 @@ export function HeroSection() {
 
 const menuItems = [
     { name: 'Servicios', href: '#servicios' },
-    { name: 'Cortex', href: '#cortex' },
+    { name: 'Contacto', href: '#contacto' },
     { name: 'Planes', href: '#planes' },
     { name: 'FAQ', href: '#faq' },
 ]
