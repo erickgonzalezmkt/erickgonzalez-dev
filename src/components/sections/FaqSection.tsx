@@ -29,9 +29,8 @@ export function FaqSection() {
     <section
       ref={sectionRef}
       id="faq"
-      className="relative py-32 px-6"
+      className="relative py-32 px-6 bg-white"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background to-background pointer-events-none" />
 
       <div className="relative max-w-3xl mx-auto">
         {/* Header */}
@@ -51,7 +50,7 @@ export function FaqSection() {
             <AccordionItem
               key={i}
               value={`item-${i}`}
-              className="border border-border-subtle rounded-xl px-6 bg-surface/20 backdrop-blur-sm data-[state=open]:border-brand/20 transition-all duration-300"
+              className="border border-border rounded-xl px-6 bg-surface/50 data-[state=open]:border-brand/30 transition-all duration-300"
             >
               <AccordionTrigger className="text-sm sm:text-base font-medium text-foreground hover:text-brand transition-colors py-5 [&[data-state=open]>svg]:text-brand [&>svg]:text-muted-foreground">
                 {faq.question}

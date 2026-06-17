@@ -20,7 +20,7 @@ const headingFont = Space_Grotesk({
 })
 
 export const viewport = {
-  themeColor: '#030712',
+  themeColor: '#ffffff',
   width: 'device-width',
   initialScale: 1,
 }
@@ -109,7 +109,7 @@ export default function RootLayout({
   return (
     <html
       lang="es-MX"
-      className={`${dmSans.variable} ${headingFont.variable} dark`}
+      className={`${dmSans.variable} ${headingFont.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -192,8 +192,6 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased min-h-screen bg-background text-foreground">
-        {/* Grain texture overlay */}
-        <div className="grain-overlay" aria-hidden="true" />
         {children}
       </body>
     </html>

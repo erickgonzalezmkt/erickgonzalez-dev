@@ -45,7 +45,7 @@ function TechChip({ tech, index }: { tech: TechItem; index: number }) {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: '-30px' }}
       transition={{ duration: 0.35, delay: index * 0.03, ease: [0.16, 1, 0.3, 1] }}
-      className="inline-flex items-center gap-1.5 rounded-lg border border-foreground/8 bg-background/40 px-3 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-sm transition-all duration-300 hover:border-foreground/20 hover:text-foreground hover:bg-foreground/[0.03]"
+      className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-white px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all duration-300 hover:border-foreground/20 hover:text-foreground hover:bg-surface"
     >
       <span
         className="h-1.5 w-1.5 rounded-full"
@@ -86,16 +86,7 @@ function CategoryGroup({
 
 export function StackSection() {
   return (
-    <section id="stack" className="relative py-24 md:py-28 overflow-hidden">
-      {/* Background glow */}
-      <div
-        className="absolute top-1/3 -left-48 w-[500px] h-[500px] rounded-full bg-brand/5 blur-[140px] pointer-events-none"
-        aria-hidden
-      />
-      <div
-        className="absolute bottom-1/4 -right-48 w-[400px] h-[400px] rounded-full bg-accent/5 blur-[100px] pointer-events-none"
-        aria-hidden
-      />
+    <section id="stack" className="relative py-24 md:py-28 overflow-hidden bg-white">
 
       <div className="relative max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -136,7 +127,7 @@ export function StackSection() {
               className="hidden lg:block h-px bg-gradient-to-r from-transparent via-border to-transparent origin-left"
             />
 
-            <div className="space-y-6 rounded-2xl border border-border-subtle bg-surface/20 p-6 md:p-8 backdrop-blur-sm">
+            <div className="space-y-6 rounded-2xl border border-border bg-surface/50 p-6 md:p-8">
               <div className="space-y-5">
                 {categories.map((cat, i) => (
                   <CategoryGroup key={cat} category={cat} index={i} />

@@ -45,10 +45,8 @@ function StarRating({ rating }: { rating: number }) {
 
 export function TestimonialsSection() {
   return (
-    <section className="relative py-28 px-6 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-brand/[0.02] to-background pointer-events-none" />
-      <div className="glow-blue top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]" />
+    <section className="relative py-28 px-6 overflow-hidden bg-surface/30">
+      <div className="glow-brand top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]" />
 
       <div className="relative max-w-6xl mx-auto">
         {/* Header */}
@@ -76,7 +74,7 @@ export function TestimonialsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative mb-16 overflow-hidden rounded-2xl border border-border-subtle bg-surface/30 backdrop-blur-sm p-8 md:p-12"
+          className="relative mb-16 overflow-hidden rounded-2xl border border-border bg-white p-8 md:p-12"
         >
           {/* Quote mark decoration */}
           <svg
@@ -114,7 +112,7 @@ export function TestimonialsSection() {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ y: -4 }}
-              className="flex flex-col rounded-xl border border-border-subtle bg-surface/30 p-6 backdrop-blur-sm hover:border-brand/20 transition-all duration-300"
+              className="flex flex-col rounded-xl border border-border bg-white p-6 hover:border-brand/20 hover:shadow-sm transition-all duration-300"
             >
               <StarRating rating={card.rating} />
               <p className="mt-4 flex-1 text-muted-foreground leading-relaxed text-sm">

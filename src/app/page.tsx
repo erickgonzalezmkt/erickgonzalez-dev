@@ -4,6 +4,8 @@ import dynamic from 'next/dynamic'
 import { Navigation } from '@/components/Navigation'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { ServicesSection } from '@/components/sections/ServicesSection'
+import { ProcessSection } from '@/components/sections/ProcessSection'
+import { N8nFlowSection } from '@/components/sections/N8nFlowSection'
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
 import { StackSection } from '@/components/sections/StackSection'
 import { PricingSection } from '@/components/sections/PricingSection'
@@ -17,19 +19,15 @@ const SmoothScroll = dynamic(
   { ssr: false }
 )
 
-const MagneticCursor = dynamic(
-  () => import('@/components/effects/MagneticCursor').then((m) => ({ default: m.MagneticCursor })),
-  { ssr: false }
-)
-
 export default function Home() {
   return (
     <>
-      <MagneticCursor />
       <Navigation />
       <SmoothScroll>
         <HeroSection />
         <ServicesSection />
+        <ProcessSection />
+        <N8nFlowSection />
         <TestimonialsSection />
         <StackSection />
         <PricingSection />

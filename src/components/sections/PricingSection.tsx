@@ -19,10 +19,8 @@ const itemVariants = {
 
 export function PricingSection() {
   return (
-    <section id="planes" className="relative py-28 px-6 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-brand/[0.01] to-background pointer-events-none" />
-      <div className="glow-blue top-1/3 -left-48 w-[500px] h-[500px]" />
+    <section id="planes" className="relative py-28 px-6 overflow-hidden bg-surface/30">
+      <div className="glow-brand top-1/3 -left-48 w-[500px] h-[500px]" />
 
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
@@ -55,8 +53,8 @@ export function PricingSection() {
               variants={itemVariants}
               className={`relative flex flex-col rounded-2xl border p-6 md:p-8 transition-all duration-500 ${
                 plan.highlighted
-                  ? 'border-brand/40 bg-gradient-to-b from-brand/[0.06] to-transparent shadow-[0_0_30px_-8px_rgba(59,130,246,0.15)] hover:border-brand/60 hover:shadow-[0_0_40px_-8px_rgba(59,130,246,0.25)]'
-                  : 'border-border-subtle bg-surface/20 backdrop-blur-sm hover:border-foreground/20 hover:bg-surface/40'
+                  ? 'border-brand/30 bg-white shadow-sm hover:border-brand/50'
+                  : 'border-border bg-white hover:border-foreground/20 hover:shadow-sm'
               }`}
             >
               {/* Highlighted badge */}
@@ -100,8 +98,8 @@ export function PricingSection() {
                   rel="noopener noreferrer"
                   className={`inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-medium transition-all duration-300 ${
                     plan.highlighted
-                      ? 'bg-brand text-white shadow-lg shadow-brand/20 hover:bg-brand-dark'
-                      : 'border border-border text-foreground hover:bg-foreground/5 hover:border-foreground/20'
+                      ? 'bg-brand text-white shadow-sm shadow-brand/20 hover:bg-brand-dark'
+                      : 'border border-border text-foreground/80 hover:text-foreground hover:border-foreground/20'
                   }`}
                 >
                   Empezar proyecto

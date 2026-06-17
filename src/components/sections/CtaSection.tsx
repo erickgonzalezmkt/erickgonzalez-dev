@@ -11,10 +11,8 @@ const WA_MESSAGE_GENERAL = encodeURIComponent('Hola Erick! Quiero saber más sob
 
 export function CtaSection() {
   return (
-    <section className="relative py-28 px-6 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-brand/[0.03] to-background pointer-events-none" />
-      <div className="glow-blue top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]" />
+    <section className="relative py-28 px-6 overflow-hidden bg-white">
+      <div className="glow-brand top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]" />
 
       {/* Decorative corners */}
       <div className="absolute top-0 left-0 w-32 h-32 border-t border-l border-brand/10 rounded-tl-3xl pointer-events-none" aria-hidden />
@@ -51,7 +49,7 @@ export function CtaSection() {
             >
               <Button
                 size="lg"
-                className="rounded-full text-base px-10 py-6 group shadow-lg shadow-brand/20"
+                className="rounded-xl text-base px-8 py-6 group bg-foreground hover:bg-foreground/90"
               >
                 <MessageCircle size={18} className="mr-2" />
                 Agendar llamada

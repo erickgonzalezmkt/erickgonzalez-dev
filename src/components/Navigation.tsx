@@ -30,7 +30,7 @@ export function Navigation() {
       <div className={cn(
         'mx-auto max-w-6xl transition-all duration-500',
         scrolled
-          ? 'mt-2 rounded-2xl border border-border-subtle bg-background/80 backdrop-blur-xl shadow-lg shadow-black/10'
+          ? 'mt-2 rounded-2xl border border-border bg-white/90 shadow-sm shadow-black/5'
           : 'mt-4'
       )}>
         <div className="flex items-center justify-between px-5 h-14 md:h-16">
@@ -46,10 +46,10 @@ export function Navigation() {
               <a
                 key={link.href}
                 href={link.href}
-                className="relative px-3 py-2 text-sm text-muted-foreground/80 hover:text-foreground transition-colors duration-200 group"
+                className="relative px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 group"
               >
                 {link.label}
-                <span className="absolute bottom-0 left-3 right-3 h-[1.5px] origin-left scale-x-0 rounded-full bg-brand transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+                <span className="absolute bottom-0 left-3 right-3 h-[1.5px] origin-left scale-x-0 rounded-full bg-brand transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
               </a>
             ))}
           </nav>
@@ -60,13 +60,13 @@ export function Navigation() {
               href={`https://wa.me/584120198300?text=${encodeURIComponent('Hola Erick! Quiero saber m\u00e1s sobre tus servicios.')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center h-8 px-4 text-sm font-medium rounded-lg border border-border bg-background hover:bg-foreground/5 text-muted-foreground hover:text-foreground transition-all duration-200"
+              className="inline-flex items-center justify-center h-8 px-4 text-sm font-medium rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-all duration-200"
             >
               WhatsApp
             </a>
             <a
               href="#contacto"
-              className="inline-flex items-center justify-center h-8 px-4 text-sm font-medium rounded-lg bg-brand text-white hover:bg-brand-dark transition-all duration-200"
+              className="inline-flex items-center justify-center h-8 px-4 text-sm font-medium rounded-lg bg-brand text-white hover:bg-brand-dark transition-all duration-200 shadow-sm shadow-brand/20"
             >
               Contacto
             </a>
@@ -92,7 +92,7 @@ export function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl md:hidden"
+            className="fixed inset-0 z-40 bg-white/98 md:hidden"
           >
             <div className="flex flex-col h-full pt-24 px-6 pb-8">
               <nav className="flex-1">

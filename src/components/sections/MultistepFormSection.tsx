@@ -141,9 +141,7 @@ export function MultistepFormSection() {
   }
 
   return (
-    <section id="contacto" className="relative py-24 px-6 overflow-hidden">
-      {/* Background con brand tint */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-brand/5 to-background pointer-events-none" />
+    <section id="contacto" className="relative py-24 px-6 overflow-hidden bg-surface/30">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand/3 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="relative max-w-lg mx-auto">
@@ -191,7 +189,7 @@ export function MultistepFormSection() {
         </div>
 
         {/* Form */}
-        <div className="rounded-2xl border border-foreground/10 bg-background/50 backdrop-blur-sm overflow-hidden shadow-[0_0_40px_-8px_rgba(37,99,235,0.1)]">
+        <div className="rounded-2xl border border-border bg-white overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStep}
@@ -214,7 +212,7 @@ export function MultistepFormSection() {
                       placeholder="Tu nombre"
                       value={formData.name}
                       onChange={(e) => updateFormData('name', e.target.value)}
-                      className="w-full rounded-xl border border-foreground/10 bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-300 focus:border-brand/40 focus:ring-2 focus:ring-brand/10"
+                      className="w-full rounded-xl border border-border bg-surface/50 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-300 focus:border-brand/40 focus:ring-2 focus:ring-brand/10"
                     />
                   </motion.div>
                   <motion.div variants={fadeInUp} className="space-y-2">
@@ -225,7 +223,7 @@ export function MultistepFormSection() {
                       placeholder="tu@email.com"
                       value={formData.email}
                       onChange={(e) => updateFormData('email', e.target.value)}
-                      className="w-full rounded-xl border border-foreground/10 bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-300 focus:border-brand/40 focus:ring-2 focus:ring-brand/10"
+                      className="w-full rounded-xl border border-border bg-surface/50 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-300 focus:border-brand/40 focus:ring-2 focus:ring-brand/10"
                     />
                   </motion.div>
                   <motion.div variants={fadeInUp} className="space-y-2">
@@ -235,7 +233,7 @@ export function MultistepFormSection() {
                       placeholder="Nombre de tu empresa"
                       value={formData.company}
                       onChange={(e) => updateFormData('company', e.target.value)}
-                      className="w-full rounded-xl border border-foreground/10 bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-300 focus:border-brand/40 focus:ring-2 focus:ring-brand/10"
+                      className="w-full rounded-xl border border-border bg-surface/50 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-300 focus:border-brand/40 focus:ring-2 focus:ring-brand/10"
                     />
                   </motion.div>
                 </div>
@@ -266,8 +264,8 @@ export function MultistepFormSection() {
                           className={cn(
                             'flex items-center gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-all duration-200',
                             formData.service === svc.value
-                              ? 'border-brand/40 bg-brand/[0.06]'
-                              : 'border-foreground/10 hover:border-foreground/20 hover:bg-foreground/[0.02]'
+                              ? 'border-brand/40 bg-brand/[0.04]'
+                              : 'border-border hover:border-foreground/20 hover:bg-surface'
                           )}
                           onClick={() => updateFormData('service', svc.value)}
                         >
@@ -292,7 +290,7 @@ export function MultistepFormSection() {
                       value={formData.goal}
                       onChange={(e) => updateFormData('goal', e.target.value)}
                       rows={2}
-                      className="w-full rounded-xl border border-foreground/10 bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-300 focus:border-brand/40 focus:ring-2 focus:ring-brand/10 resize-none"
+                      className="w-full rounded-xl border border-border bg-surface/50 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-300 focus:border-brand/40 focus:ring-2 focus:ring-brand/10 resize-none"
                     />
                   </motion.div>
                 </div>
@@ -314,8 +312,8 @@ export function MultistepFormSection() {
                           className={cn(
                             'rounded-xl border px-3 py-2.5 text-center text-sm cursor-pointer transition-all duration-200',
                             formData.budget === b
-                              ? 'border-brand/40 bg-brand/[0.06] text-brand'
-                              : 'border-foreground/10 text-foreground/60 hover:border-foreground/20'
+                              ? 'border-brand/40 bg-brand/[0.04] text-brand'
+                              : 'border-border text-muted-foreground hover:border-foreground/20 hover:text-foreground'
                           )}
                           onClick={() => updateFormData('budget', b)}
                         >
@@ -338,8 +336,8 @@ export function MultistepFormSection() {
                           className={cn(
                             'rounded-xl border px-3 py-2.5 text-center text-sm cursor-pointer transition-all duration-200',
                             formData.timeline === t.value
-                              ? 'border-brand/40 bg-brand/[0.06] text-brand'
-                              : 'border-foreground/10 text-foreground/60 hover:border-foreground/20'
+                              ? 'border-brand/40 bg-brand/[0.04] text-brand'
+                              : 'border-border text-muted-foreground hover:border-foreground/20 hover:text-foreground'
                           )}
                           onClick={() => updateFormData('timeline', t.value)}
                         >
@@ -356,7 +354,7 @@ export function MultistepFormSection() {
                       value={formData.details}
                       onChange={(e) => updateFormData('details', e.target.value)}
                       rows={2}
-                      className="w-full rounded-xl border border-foreground/10 bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-300 focus:border-brand/40 focus:ring-2 focus:ring-brand/10 resize-none"
+                      className="w-full rounded-xl border border-border bg-surface/50 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-300 focus:border-brand/40 focus:ring-2 focus:ring-brand/10 resize-none"
                     />
                   </motion.div>
                 </div>
@@ -369,7 +367,7 @@ export function MultistepFormSection() {
                     <h3 className="text-lg font-semibold text-foreground mb-1">Confirma tus datos</h3>
                     <p className="text-sm text-muted-foreground mb-5">¿Todo bien? Te redirigiremos a WhatsApp con un resumen.</p>
                   </div>
-                  <motion.div variants={fadeInUp} className="space-y-3 rounded-xl border border-foreground/10 bg-foreground/[0.02] p-4">
+                  <motion.div variants={fadeInUp} className="space-y-3 rounded-xl border border-border bg-surface/50 p-4">
                     {[
                       { label: 'Nombre', value: formData.name },
                       { label: 'Email', value: formData.email },

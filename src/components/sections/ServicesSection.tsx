@@ -16,8 +16,8 @@ function ServiceCard({ service, featured }: { service: Service; featured?: boole
       <div
         className={`relative flex h-full flex-col rounded-2xl border transition-all duration-500 ${
           featured
-            ? 'border-brand/30 bg-gradient-to-b from-brand/[0.06] to-surface/40 p-8 md:p-10 hover:shadow-[0_0_40px_-12px_rgba(59,130,246,0.2)]'
-            : 'border-border-subtle bg-surface/40 p-8 hover:border-brand/30 hover:bg-surface/60 hover:shadow-[0_0_30px_-8px_rgba(59,130,246,0.12)]'
+            ? 'border-brand/20 bg-gradient-to-b from-brand/[0.04] to-white p-8 md:p-10'
+            : 'border-border bg-white p-8 hover:border-brand/20 hover:bg-brand/[0.02]'
         }`}
       >
         {/* Gradient overlay */}
@@ -30,7 +30,7 @@ function ServiceCard({ service, featured }: { service: Service; featured?: boole
         />
 
         {/* Icon */}
-        <div className="relative mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-border-subtle bg-background/60 transition-colors duration-500 group-hover:border-brand/30 group-hover:bg-brand/10">
+        <div className="relative mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-surface/50 transition-colors duration-500 group-hover:border-brand/30 group-hover:bg-brand/5">
           <Icon size={22} className="text-brand" />
         </div>
 
@@ -63,10 +63,8 @@ function ServiceCard({ service, featured }: { service: Service; featured?: boole
 
 export function ServicesSection() {
   return (
-    <section id="servicios" className="relative py-24 md:py-28 px-6">
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-brand/[0.02] to-background pointer-events-none" />
-      <div className="glow-blue top-1/4 left-1/3 w-[500px] h-[500px]" />
+    <section id="servicios" className="relative py-24 md:py-28 px-6 bg-white">
+      <div className="glow-brand top-1/4 left-1/3 w-[500px] h-[500px]" />
 
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
