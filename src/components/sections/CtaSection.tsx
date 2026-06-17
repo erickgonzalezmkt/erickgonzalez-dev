@@ -1,6 +1,5 @@
 'use client'
 
-import { useRef } from 'react'
 import { motion } from 'motion/react'
 import { ArrowRight, MessageCircle, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -11,17 +10,17 @@ const WA_MESSAGE_CTA = encodeURIComponent('Hola Erick! Vi tu landing y quiero ag
 const WA_MESSAGE_GENERAL = encodeURIComponent('Hola Erick! Quiero saber más sobre tus servicios.')
 
 export function CtaSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-
   return (
-    <section
-      ref={sectionRef}
-      id="contacto"
-      className="relative py-32 px-6"
-    >
-      {/* Full gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-brand/8 to-background pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
+    <section className="relative py-28 px-6 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-brand/[0.03] to-background pointer-events-none" />
+      <div className="glow-blue top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]" />
+
+      {/* Decorative corners */}
+      <div className="absolute top-0 left-0 w-32 h-32 border-t border-l border-brand/10 rounded-tl-3xl pointer-events-none" aria-hidden />
+      <div className="absolute top-0 right-0 w-32 h-32 border-t border-r border-brand/10 rounded-tr-3xl pointer-events-none" aria-hidden />
+      <div className="absolute bottom-0 left-0 w-32 h-32 border-b border-l border-brand/10 rounded-bl-3xl pointer-events-none" aria-hidden />
+      <div className="absolute bottom-0 right-0 w-32 h-32 border-b border-r border-brand/10 rounded-br-3xl pointer-events-none" aria-hidden />
 
       <div className="relative max-w-4xl mx-auto text-center">
         <motion.div
@@ -57,7 +56,7 @@ export function CtaSection() {
             >
               <Button
                 size="lg"
-                className="rounded-full text-base px-10 py-6 group magnetic-target"
+                className="rounded-full text-base px-10 py-6 group shadow-lg shadow-brand/20"
               >
                 <MessageCircle size={18} className="mr-2" />
                 Agendar llamada
@@ -77,7 +76,7 @@ export function CtaSection() {
               <Button
                 variant="outline"
                 size="lg"
-                className="rounded-full text-base px-10 py-6 border-border-subtle magnetic-target"
+                className="rounded-full text-base px-10 py-6 border-border-subtle"
               >
                 <Sparkles size={18} className="mr-2" />
                 Enviar mensaje

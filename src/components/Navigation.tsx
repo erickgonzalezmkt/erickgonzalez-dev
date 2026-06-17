@@ -1,16 +1,16 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'motion/react'
 import { Menu, X } from 'lucide-react'
-import { gsap } from '@/lib/gsap'
-import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 const navLinks = [
   { label: 'Servicios', href: '#servicios' },
   { label: 'Stack', href: '#stack' },
-  { label: 'Cortex Lead Engine', href: '#cortex' },
   { label: 'Planes', href: '#planes' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'Contacto', href: '#contacto' },
 ]
 
 export function Navigation() {
@@ -18,108 +18,124 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    // Animate nav links on mount
-    gsap.from('.nav-link', {
-      y: -20,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.08,
-      ease: 'power3.out',
-      delay: 0.5,
-    })
-  }, [])
+  const handleNavClick = () => setIsOpen(false)
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6">
+      <div className={cn(
+        'mx-auto max-w-6xl transition-all duration-500',
         scrolled
-          ? 'bg-background/80 backdrop-blur-xl border-b border-border-subtle'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
-        {/* Logo */}
-        <a
-          href="#"
-          className="text-xl font-heading font-bold tracking-tight relative group"
-        >
-          <span className="text-foreground">Erick</span>
-          <span className="text-brand"> Gonzalez</span>
-          <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-brand transition-all duration-300 group-hover:w-full" />
-        </a>
+          ? 'mt-2 rounded-2xl border border-border-subtle bg-background/80 backdrop-blur-xl shadow-lg shadow-black/10'
+          : 'mt-4'
+      )}>
+        <div className="flex items-center justify-between px-5 h-14 md:h-16">
+          {/* Logo */}
+          <Link href="/" className="text-lg font-heading font-bold tracking-tight whitespace-nowrap" aria-label="Home">
+            <span className="text-foreground">Erick</span>
+            <span className="text-brand"> Gonzalez</span>
+          </Link>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="px-3 py-2 text-sm text-muted-foreground/80 hover:text-foreground transition-colors duration-200 rounded-lg hover:bg-foreground/5"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Desktop CTAs */}
+          <div className="hidden md:flex items-center gap-2">
             <a
-              key={link.href}
-              href={link.href}
-              className="nav-link text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 relative group"
+              href={`https://wa.me/584120198300?text=${encodeURIComponent('Hola Erick! Quiero saber m\u00e1s sobre tus servicios.')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-8 px-4 text-sm font-medium rounded-lg border border-border bg-background hover:bg-foreground/5 text-muted-foreground hover:text-foreground transition-all duration-200"
             >
-              {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand transition-all duration-300 group-hover:w-full" />
+              WhatsApp
             </a>
-          ))}
-          <a href="#contacto" className="nav-link">
-            <Button size="sm" className="rounded-full">
+            <a
+              href="#contacto"
+              className="inline-flex items-center justify-center h-8 px-4 text-sm font-medium rounded-lg bg-brand text-white hover:bg-brand-dark transition-all duration-200"
+            >
               Contacto
-            </Button>
-          </a>
-        </div>
+            </a>
+          </div>
 
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden text-foreground relative z-50 magnetic-target"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? 'Cerrar men\u00fa' : 'Abrir men\u00fa'}
+            className="relative z-50 flex items-center justify-center p-2 md:hidden"
+          >
+            <Menu className={cn('size-5 transition-all duration-300', isOpen ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100')} />
+            <X className={cn('absolute size-5 transition-all duration-300', isOpen ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0')} />
+          </button>
+        </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 bg-background/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8"
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl md:hidden"
           >
-            {navLinks.map((link, i) => (
-              <motion.a
-                key={link.href}
-                href={link.href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                onClick={() => setIsOpen(false)}
-                className="text-2xl font-heading font-medium hover:text-brand transition-colors"
-              >
-                {link.label}
-              </motion.a>
-            ))}
-            <motion.a
-              href="#contacto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navLinks.length * 0.1 }}
-              onClick={() => setIsOpen(false)}
-            >
-              <Button className="rounded-full mt-4">Contacto</Button>
-            </motion.a>
+            <div className="flex flex-col h-full pt-24 px-6 pb-8">
+              <nav className="flex-1">
+                <ul className="space-y-1">
+                  {navLinks.map((link, i) => (
+                    <motion.li
+                      key={link.href}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                    >
+                      <a
+                        href={link.href}
+                        onClick={handleNavClick}
+                        className="block py-3 px-4 text-lg font-medium text-foreground/70 hover:text-foreground hover:bg-foreground/5 rounded-xl transition-all"
+                      >
+                        {link.label}
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+              </nav>
+              <div className="space-y-3 pt-4 border-t border-border-subtle">
+                <a
+                  href={`https://wa.me/584120198300?text=${encodeURIComponent('Hola Erick! Quiero saber m\u00e1s sobre tus servicios.')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleNavClick}
+                  className="flex w-full items-center justify-center rounded-xl border border-foreground/10 px-4 py-3 text-sm font-medium text-foreground transition-all hover:bg-foreground/5"
+                >
+                  WhatsApp
+                </a>
+                <a
+                  href="#contacto"
+                  onClick={handleNavClick}
+                  className="flex w-full items-center justify-center rounded-xl bg-brand px-4 py-3 text-sm font-medium text-white transition-all hover:bg-brand-dark"
+                >
+                  Contacto
+                </a>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   )
 }

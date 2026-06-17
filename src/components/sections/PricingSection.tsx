@@ -1,181 +1,119 @@
 'use client'
 
-import { useRef } from 'react'
-import { gsap, useGSAP } from '@/lib/gsap'
 import { motion } from 'motion/react'
-import { Check, ArrowRight, Zap } from 'lucide-react'
+import { Check } from 'lucide-react'
 import { plans } from '@/data/pricing'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 
-function PlanCard({
-  plan,
-  index,
-}: {
-  plan: (typeof plans)[0]
-  index: number
-}) {
-  const cardRef = useRef<HTMLDivElement>(null)
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+}
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width - 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5
-    gsap.to(cardRef.current, {
-      rotateX: y * -6,
-      rotateY: x * 6,
-      duration: 0.5,
-      ease: 'power2.out',
-    })
-  }
-
-  const handleMouseLeave = () => {
-    gsap.to(cardRef.current, {
-      rotateX: 0,
-      rotateY: 0,
-      duration: 0.5,
-      ease: 'power2.out',
-    })
-  }
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.6, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
-      style={{ perspective: '800px' }}
-      className={`relative ${plan.highlighted ? 'lg:-mt-4 lg:mb-[-16px] z-10' : ''}`}
-    >
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className={`relative rounded-2xl border p-8 backdrop-blur-sm h-full flex flex-col transition-all duration-500 cursor-default ${
-          plan.highlighted
-            ? 'border-brand/40 bg-gradient-to-b from-brand/10 to-accent/5 shadow-[0_0_40px_-8px_rgba(6,182,212,0.2)]'
-            : 'border-border-subtle bg-surface/30 hover:border-brand/20'
-        }`}
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-        {/* Highlighted badge */}
-        {plan.highlighted && (
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-            <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-brand text-primary-foreground text-xs font-semibold">
-              <Zap size={12} />
-              Más popular
-            </span>
-          </div>
-        )}
-
-        <div style={{ transform: 'translateZ(20px)' }}>
-          {/* Header */}
-          <div className="mb-6">
-            <span className="text-xs font-semibold uppercase tracking-widest text-brand">
-              {plan.platform}
-            </span>
-            <h3 className="text-2xl font-heading font-bold text-foreground mt-1">
-              {plan.name}
-            </h3>
-            <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-              {plan.description}
-            </p>
-          </div>
-
-          {/* Price */}
-          <div className="mb-8">
-            <span className="text-4xl font-heading font-black text-foreground">
-              {plan.price}
-            </span>
-          </div>
-
-          {/* Features */}
-          <ul className="space-y-3 mb-8 flex-1">
-            {plan.features.map((feature) => (
-              <li
-                key={feature}
-                className="flex items-start gap-3 text-sm text-muted-foreground/80"
-              >
-                <Check
-                  size={16}
-                  className={`mt-0.5 shrink-0 ${
-                    plan.highlighted ? 'text-brand' : 'text-muted-foreground/50'
-                  }`}
-                />
-                {feature}
-              </li>
-            ))}
-          </ul>
-
-          {/* CTA */}
-          <a href="#contacto" className="block">
-            <Button
-              className={`w-full rounded-full ${
-                plan.highlighted
-                  ? 'bg-brand text-primary-foreground hover:bg-brand-dark'
-                  : ''
-              }`}
-              variant={plan.highlighted ? 'default' : 'outline'}
-            >
-              Empezar
-              <ArrowRight size={16} className="ml-2" />
-            </Button>
-          </a>
-        </div>
-      </div>
-    </motion.div>
-  )
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
 }
 
 export function PricingSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.pricing-header',
-        start: 'top 85%',
-      },
-    })
-    tl.from('.pricing-label', { y: 20, opacity: 0, duration: 0.5 })
-    tl.from('.pricing-title', { y: 30, opacity: 0, duration: 0.6 }, '-=0.2')
-    tl.from('.pricing-desc', { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
-  }, { scope: sectionRef })
-
   return (
-    <section
-      ref={sectionRef}
-      id="planes"
-      className="relative py-32 px-6"
-    >
-      <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background to-background/50 pointer-events-none" />
+    <section id="planes" className="relative py-28 px-6 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-brand/[0.01] to-background pointer-events-none" />
+      <div className="glow-blue top-1/3 -left-48 w-[500px] h-[500px]" />
 
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
-        <div className="pricing-header text-center mb-16">
-          <Badge
-            variant="outline"
-            className="pricing-label mb-4 border-amber-500/30 text-amber-400"
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-16"
+        >
+          <Badge variant="outline" className="mb-4 border-accent/30 text-accent">
             Planes
           </Badge>
-          <h2 className="pricing-title text-4xl sm:text-5xl font-heading font-black tracking-tight">
-            Inversión{' '}
-            <span className="text-brand">transparente.</span>
+          <h2 className="text-4xl sm:text-5xl font-heading font-black tracking-tight text-foreground">
+            Inversión <span className="text-brand">transparente.</span>
           </h2>
-          <p className="pricing-desc mt-4 text-muted-foreground max-w-xl mx-auto">
-            Desde landing pages rápidas hasta sistemas completos de crecimiento.
-            Escala cuando quieras.
+          <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
+            Elegí el plan que mejor se adapte a tu proyecto. Sin letra chica, sin sorpresas.
           </p>
-        </div>
+        </motion.div>
 
         {/* Pricing grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
-          {plans.map((plan, i) => (
-            <PlanCard key={plan.name} plan={plan} index={i} />
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-start"
+        >
+          {plans.map((plan) => (
+            <motion.div
+              key={plan.name}
+              variants={itemVariants}
+              className={`relative flex flex-col rounded-2xl border p-6 md:p-8 transition-all duration-500 ${
+                plan.highlighted
+                  ? 'border-brand/40 bg-gradient-to-b from-brand/[0.06] to-transparent shadow-[0_0_30px_-8px_rgba(59,130,246,0.15)] hover:border-brand/60 hover:shadow-[0_0_40px_-8px_rgba(59,130,246,0.25)]'
+                  : 'border-border-subtle bg-surface/20 backdrop-blur-sm hover:border-foreground/20 hover:bg-surface/40'
+              }`}
+            >
+              {/* Highlighted badge */}
+              {plan.highlighted && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="inline-flex items-center gap-1 px-4 py-1 rounded-full bg-brand text-primary-foreground text-xs font-semibold whitespace-nowrap shadow-lg shadow-brand/20">
+                    Más popular
+                  </span>
+                </div>
+              )}
+
+              {/* Platform */}
+              <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-brand mb-3">
+                {plan.platform}
+              </span>
+
+              {/* Name & Price */}
+              <h3 className="text-xl font-heading font-bold text-foreground mb-1">{plan.name}</h3>
+              <div className="mb-4">
+                <span className="text-2xl md:text-3xl font-heading font-black text-foreground">{plan.price}</span>
+              </div>
+
+              {/* Description */}
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">{plan.description}</p>
+
+              {/* Features */}
+              <ul className="space-y-3 mb-8 flex-1">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3 text-sm text-muted-foreground/90">
+                    <Check size={14} className={`mt-0.5 shrink-0 ${plan.highlighted ? 'text-brand' : 'text-muted-foreground/50'}`} strokeWidth={3} />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA */}
+              <div className="mt-auto">
+                <a
+                  href={`https://wa.me/584120198300?text=${encodeURIComponent(`Hola Erick! Me interesa el plan ${plan.name}.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-medium transition-all duration-300 ${
+                    plan.highlighted
+                      ? 'bg-brand text-white shadow-lg shadow-brand/20 hover:bg-brand-dark'
+                      : 'border border-border text-foreground hover:bg-foreground/5 hover:border-foreground/20'
+                  }`}
+                >
+                  Empezar proyecto
+                </a>
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

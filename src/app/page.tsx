@@ -1,16 +1,17 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import { Navigation } from '@/components/Navigation'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { ServicesSection } from '@/components/sections/ServicesSection'
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
 import { StackSection } from '@/components/sections/StackSection'
+import { PricingSection } from '@/components/sections/PricingSection'
 import { MultistepFormSection } from '@/components/sections/MultistepFormSection'
-import { BentoPricing } from '@/components/sections/BentoPricing'
 import { FaqSection } from '@/components/sections/FaqSection'
 import { CtaSection } from '@/components/sections/CtaSection'
 import { Footer } from '@/components/Footer'
 
-// SmoothScroll y MagneticCursor se cargan solo en cliente con dynamic import
 const SmoothScroll = dynamic(
   () => import('@/components/effects/SmoothScroll').then((m) => ({ default: m.SmoothScroll })),
   { ssr: false }
@@ -25,12 +26,14 @@ export default function Home() {
   return (
     <>
       <MagneticCursor />
+      <Navigation />
       <SmoothScroll>
         <HeroSection />
         <ServicesSection />
+        <TestimonialsSection />
         <StackSection />
+        <PricingSection />
         <MultistepFormSection />
-        <BentoPricing />
         <FaqSection />
         <CtaSection />
         <Footer />
