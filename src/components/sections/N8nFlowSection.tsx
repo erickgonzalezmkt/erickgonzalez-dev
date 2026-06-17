@@ -1,114 +1,164 @@
 'use client'
 
 import { useRef } from 'react'
-import { gsap, useGSAP } from '@/lib/gsap'
+import { motion, useInView } from 'motion/react'
+import { Users, GitBranch, Database, Bell, Mail, ArrowRight } from 'lucide-react'
 
-const flowSteps = [
+const nodes = [
   {
-    label: 'Lead llega',
-    desc: 'WhatsApp, web o redes sociales — un prospecto entra al sistema.',
-    color: 'bg-brand/10 text-brand',
+    id: 'lead',
+    label: 'Lead',
+    sublabel: 'Formulario / Web',
+    icon: Users,
+    x: 0,
+    color: 'text-brand',
+    bg: 'bg-brand/10',
+    border: 'border-brand/30',
   },
   {
-    label: 'n8n procesa',
-    desc: 'Clasifica, filtra duplicados y enriquece con datos del contacto.',
-    color: 'bg-foreground/5 text-foreground',
+    id: 'n8n',
+    label: 'n8n',
+    sublabel: 'Automatización',
+    icon: GitBranch,
+    x: 1,
+    color: 'text-foreground',
+    bg: 'bg-foreground/5',
+    border: 'border-border',
   },
   {
-    label: 'CRM se actualiza',
-    desc: 'El lead caliente aparece automáticamente en tu pipeline.',
-    color: 'bg-brand/10 text-brand',
+    id: 'crm',
+    label: 'CRM',
+    sublabel: 'Contacto creado',
+    icon: Database,
+    x: 2,
+    color: 'text-brand',
+    bg: 'bg-brand/10',
+    border: 'border-brand/30',
   },
   {
-    label: 'Te notifica',
-    desc: 'Recibes un mensaje con la ficha del prospecto. Actuá rápido.',
-    color: 'bg-foreground/5 text-foreground',
+    id: 'notify',
+    label: 'Notificación',
+    sublabel: 'Slack / Email',
+    icon: Bell,
+    x: 3,
+    color: 'text-foreground',
+    bg: 'bg-foreground/5',
+    border: 'border-border',
   },
   {
-    label: 'Secuencia sigue',
-    desc: 'Email/SMS sequence automática para los que no respondieron.',
-    color: 'bg-brand/10 text-brand',
+    id: 'sequence',
+    label: 'Secuencia',
+    sublabel: 'Email + SMS',
+    icon: Mail,
+    x: 4,
+    color: 'text-brand',
+    bg: 'bg-brand/10',
+    border: 'border-brand/30',
   },
 ]
 
 export function N8nFlowSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top 75%',
-        end: 'bottom 25%',
-      },
-    })
-
-    tl.from('.flow-node', {
-      scale: 0.8,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: 'power3.out',
-    })
-
-    tl.from('.flow-arrow', {
-      scaleX: 0,
-      opacity: 0,
-      duration: 0.4,
-      stagger: 0.15,
-      ease: 'power2.out',
-      transformOrigin: 'left center',
-    }, 0.2)
-  }, { scope: sectionRef })
+  const sectionRef = useRef<HTMLElement>(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
   return (
-    <section ref={sectionRef} id="automation" className="relative py-24 md:py-32 px-6 bg-surface/50 overflow-hidden">
+    <section ref={sectionRef} id="automacion" className="relative py-24 md:py-32 px-6 bg-surface overflow-hidden">
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{
+        backgroundImage: `linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)`,
+        backgroundSize: '60px 60px',
+      }} />
+
       <div className="relative max-w-5xl mx-auto">
         {/* Header */}
-        <div className="text-left mb-16 md:mb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-left mb-16 md:mb-20"
+        >
           <div className="accent-line mb-5" />
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black tracking-tight text-foreground">
             Cómo fluye un lead.
           </h2>
           <p className="mt-4 max-w-xl text-muted-foreground leading-relaxed">
-            Desde que alguien escribe hasta que llega a tu WhatsApp como lead calificado.
-            Todo automático, 24/7.
+            Desde que alguien escribe hasta que recibe seguimiento. Todo automático.
           </p>
+        </motion.div>
+
+        {/* Desktop: Flow diagram */}
+        <div className="hidden md:block">
+          <div className="relative pt-16 pb-8">
+            {/* Background connection track */}
+            <div className="absolute top-[88px] left-[5%] right-[5%] h-px bg-border/50" />
+
+            {/* Nodes */}
+            <div className="relative flex justify-between">
+              {nodes.map((node, i) => (
+                <motion.div
+                  key={node.id}
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                  transition={{ duration: 0.6, delay: 0.15 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative flex flex-col items-center w-[18%]"
+                >
+                  {/* Node box */}
+                  <div className={`relative z-10 flex flex-col items-center gap-2 w-full px-3 py-5 rounded-2xl bg-white border ${node.border} shadow-sm`}>
+                    <div className={`flex items-center justify-center w-10 h-10 rounded-xl ${node.bg} ${node.color}`}>
+                      <node.icon size={20} strokeWidth={1.5} />
+                    </div>
+                    <span className="text-sm font-heading font-bold text-foreground">{node.label}</span>
+                    <span className="text-[10px] text-muted-foreground font-medium">{node.sublabel}</span>
+                  </div>
+
+                  {/* Arrow to next */}
+                  {i < nodes.length - 1 && (
+                    <div className="absolute -right-[11%] top-[44px] text-border">
+                      <ArrowRight size={18} />
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Flow diagram */}
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-3 lg:gap-4">
-          {flowSteps.map((step, i) => (
-            <div key={step.label} className="flow-node flex md:flex-col items-center gap-4 md:gap-3 w-full md:w-auto">
-              {/* Node */}
-              <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border border-border bg-white w-full md:w-auto ${step.color}`}>
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-brand/20 text-brand text-xs font-bold flex items-center justify-center">
-                  {i + 1}
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">{step.label}</p>
-                  <p className="text-xs text-muted-foreground/70 leading-snug mt-0.5 max-w-[180px]">{step.desc}</p>
+        {/* Mobile: Vertical flow */}
+        <div className="md:hidden space-y-0">
+          {nodes.map((node, i) => (
+            <motion.div
+              key={node.id}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-start gap-4"
+            >
+              <div className="flex flex-col items-center">
+                <div className={`flex items-center justify-center w-11 h-11 rounded-xl ${node.bg} ${node.color} border ${node.border}`}>
+                  <node.icon size={18} strokeWidth={1.5} />
                 </div>
+                {i < nodes.length - 1 && <div className="w-px flex-1 bg-border/50 my-1.5" />}
               </div>
-
-              {/* Arrow (desktop) */}
-              {i < flowSteps.length - 1 && (
-                <div className="flow-arrow hidden md:flex items-center justify-center flex-shrink-0">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-border">
-                    <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-              )}
-            </div>
+              <div className="min-h-[60px] flex flex-col justify-center">
+                <span className="text-sm font-heading font-bold text-foreground">{node.label}</span>
+                <span className="text-xs text-muted-foreground">{node.sublabel}</span>
+              </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Bottom note */}
-        <div className="mt-12 p-4 rounded-xl bg-white border border-border">
-          <p className="text-sm text-muted-foreground">
-            <span className="font-semibold text-foreground">Ejemplo real:</span> Un cliente en Caracas recibió 47 leads calificados en la primera semana después de activar este flujo. Sin mover un dedo.
-          </p>
-        </div>
+        {/* Bottom text */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-12 md:mt-16 text-sm text-muted-foreground text-left max-w-lg leading-relaxed"
+        >
+          Este flujo corre 24/7. Cada lead entra, se organiza, notifica y recibe seguimiento — sin que toques un botón.
+        </motion.p>
       </div>
     </section>
   )
