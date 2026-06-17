@@ -9,7 +9,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { faqs } from '@/data/faq'
-import { Badge } from '@/components/ui/badge'
 
 export function FaqSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -37,12 +36,6 @@ export function FaqSection() {
       <div className="relative max-w-3xl mx-auto">
         {/* Header */}
         <div className="faq-header text-center mb-16">
-          <Badge
-            variant="outline"
-            className="faq-label mb-4 border-brand/30 text-brand"
-          >
-            FAQ
-          </Badge>
           <h2 className="faq-title text-4xl sm:text-5xl font-heading font-black tracking-tight">
             Preguntas{' '}
             <span className="text-brand">frecuentes.</span>

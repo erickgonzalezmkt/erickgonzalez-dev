@@ -29,11 +29,6 @@ export function CtaSection() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Label */}
-          <span className="text-xs font-semibold uppercase tracking-widest text-brand mb-6 block">
-            ¿Listo para escalar?
-          </span>
-
           {/* Title */}
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black tracking-tight leading-[1.1] mb-6">
             Convierte tu web en{' '}

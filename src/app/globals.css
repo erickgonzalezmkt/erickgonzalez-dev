@@ -57,9 +57,9 @@
   --brand-light: oklch(0.75 0.14 255);
   --accent: oklch(0.75 0.14 85);
   --accent-dark: oklch(0.65 0.12 85);
-  --surface: oklch(0.045 0.01 265);
-  --surface-hover: oklch(0.075 0.015 265);
-  --border-subtle: oklch(1 0 0 / 0.06);
+  --surface: oklch(0.05 0.012 265);
+  --surface-hover: oklch(0.08 0.018 265);
+  --border-subtle: oklch(1 0 0 / 0.08);
   --card: oklch(0.04 0.01 265);
   --card-foreground: oklch(0.965 0.004 265);
   --popover: oklch(0.04 0.01 265);
@@ -69,11 +69,11 @@
   --secondary: oklch(0.08 0.01 265);
   --secondary-foreground: oklch(0.9 0.01 265);
   --muted: oklch(0.06 0.01 265);
-  --muted-foreground: oklch(0.55 0.02 265);
+  --muted-foreground: oklch(0.6 0.025 265);
   --destructive: oklch(0.6 0.2 25);
   --destructive-foreground: oklch(0.96 0 0);
-  --border: oklch(1 0 0 / 0.08);
-  --input: oklch(1 0 0 / 0.1);
+  --border: oklch(1 0 0 / 0.12);
+  --input: oklch(1 0 0 / 0.12);
   --ring: oklch(0.6 0.22 255);
   --sidebar: oklch(0.03 0.01 265);
   --sidebar-foreground: oklch(0.965 0.004 265);
@@ -137,16 +137,6 @@
   opacity: 0.06;
 }
 
-/* Cruip-style stripes pattern */
-.stripes-pattern {
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 20px,
-    rgba(255, 255, 255, 0.015) 20px,
-    rgba(255, 255, 255, 0.015) 21px
-  );
-}
 
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {

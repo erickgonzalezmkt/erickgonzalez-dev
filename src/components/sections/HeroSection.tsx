@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'motion/react'
-import { ArrowRight, Sparkles } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { AnimatedGroup } from '@/components/ui/animated-group'
 
 const fadeUp = {
@@ -16,11 +16,6 @@ const fadeUp = {
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Decorative stripes — Cruip style */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        <div className="absolute inset-0 stripes-pattern opacity-30" />
-      </div>
-
       {/* Glow circles */}
       <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] rounded-full bg-brand/10 blur-[120px] pointer-events-none" aria-hidden />
       <div className="absolute bottom-1/4 -right-32 w-[400px] h-[400px] rounded-full bg-accent/8 blur-[100px] pointer-events-none" aria-hidden />
@@ -32,10 +27,11 @@ export function HeroSection() {
           <AnimatedGroup variants={fadeUp}>
             <motion.a
               href="#servicios"
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border-subtle bg-foreground/5 text-sm text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-all group mb-8"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-border-subtle bg-foreground/5 text-sm text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-all group mb-8"
             >
-              <Sparkles size={14} className="text-brand" />
-              <span>Socio Tecnológico</span>
+              <span className="text-brand font-medium">Socio Tecnológico</span>
+              <span className="text-muted-foreground/40">·</span>
+              <span>Automatización & Crecimiento</span>
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
             </motion.a>
 
@@ -64,7 +60,10 @@ export function HeroSection() {
           >
             <motion.a
               href="#servicios"
-              className="inline-flex items-center gap-2 h-11 px-6 rounded-xl bg-brand text-white text-sm font-medium hover:bg-brand-dark transition-all shadow-lg shadow-brand/20"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+              className="inline-flex items-center gap-2 h-11 px-6 rounded-xl bg-brand text-white text-sm font-medium hover:bg-brand-dark shadow-lg shadow-brand/20"
             >
               Ver servicios
               <ArrowRight size={16} />
@@ -73,7 +72,10 @@ export function HeroSection() {
               href={`https://wa.me/584120198300?text=${encodeURIComponent('Hola Erick! Vi tu landing y quiero agendar una llamada.')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 h-11 px-6 rounded-xl border border-border bg-background text-muted-foreground text-sm font-medium hover:text-foreground hover:border-foreground/20 transition-all"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+              className="inline-flex items-center gap-2 h-11 px-6 rounded-xl border border-border bg-background text-muted-foreground text-sm font-medium hover:text-foreground hover:border-foreground/20"
             >
               Agendar llamada
             </motion.a>
@@ -91,7 +93,7 @@ export function HeroSection() {
           >
             <div className="mt-16 max-w-3xl mx-auto relative">
               {/* Terminal window */}
-              <div className="relative rounded-xl border border-border-subtle bg-surface/50 backdrop-blur-sm overflow-hidden shadow-2xl shadow-black/30">
+              <div className="relative rounded-xl border border-foreground/10 bg-surface/50 backdrop-blur-sm overflow-hidden">
                 {/* Terminal header */}
                 <div className="flex items-center gap-2 px-4 py-3 border-b border-border-subtle bg-background/50">
                   <div className="flex gap-1.5">
@@ -103,35 +105,21 @@ export function HeroSection() {
                 </div>
                 {/* Terminal body */}
                 <div className="p-5 md:p-6 font-mono text-sm leading-relaxed">
-                  <div className="space-y-2">
+                    <div className="space-y-2">
                     <div className="flex items-center gap-2 text-emerald-400">
                       <span className="text-foreground/40">$</span>
-                      <span>cortex lead-engine --deploy</span>
+                      <span>tail -f /var/log/cortex/system.log</span>
                     </div>
-                    <div className="text-muted-foreground pl-5 space-y-1">
-                      <p><span className="text-brand">✓</span> Sistema de captación activado</p>
-                      <p><span className="text-brand">✓</span> CRM sincronizado en tiempo real</p>
-                      <p><span className="text-brand">✓</span> Chatbot desplegado en web</p>
-                      <p><span className="text-brand">✓</span> Email sequence configurada</p>
+                    <div className="text-muted-foreground/80 pl-5 space-y-1 font-mono text-xs">
+                      <p className="text-emerald-400/60">[2026-06-16 10:32:01] cortex.lead-engine — online</p>
+                      <p className="text-emerald-400/60">[2026-06-16 10:32:02] whatsapp.bridge — connected</p>
+                      <p className="text-emerald-400/60">[2026-06-16 10:32:04] crm.sync — real-time active</p>
+                      <p className="text-emerald-400/60">[2026-06-16 10:32:07] email.sequence — 3 workflows running</p>
+                      <p className="text-emerald-400/60">[2026-06-16 10:32:10] analytics.report — 247 leads this month</p>
                     </div>
-                    <div className="flex items-center gap-2 text-emerald-400 pt-2">
+                    <div className="flex items-center gap-2 text-emerald-400 pt-1">
                       <span className="text-foreground/40">$</span>
                       <span className="animate-pulse">_</span>
-                    </div>
-                  </div>
-                  {/* Stats row */}
-                  <div className="mt-4 pt-4 border-t border-border-subtle grid grid-cols-3 gap-4">
-                    <div>
-                      <p className="text-foreground/40 text-xs">LEADS CAPTADOS</p>
-                      <p className="text-foreground font-semibold text-base">+247</p>
-                    </div>
-                    <div>
-                      <p className="text-foreground/40 text-xs">TASA CONV.</p>
-                      <p className="text-foreground font-semibold text-base">12.4%</p>
-                    </div>
-                    <div>
-                      <p className="text-foreground/40 text-xs">ROI PROMEDIO</p>
-                      <p className="text-foreground font-semibold text-base">4.8x</p>
                     </div>
                   </div>
                 </div>

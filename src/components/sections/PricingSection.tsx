@@ -3,7 +3,6 @@
 import { motion } from 'motion/react'
 import { Check } from 'lucide-react'
 import { plans } from '@/data/pricing'
-import { Badge } from '@/components/ui/badge'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -34,9 +33,6 @@ export function PricingSection() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
-          <Badge variant="outline" className="mb-4 border-accent/30 text-accent">
-            Planes
-          </Badge>
           <h2 className="text-4xl sm:text-5xl font-heading font-black tracking-tight text-foreground">
             Inversión <span className="text-brand">transparente.</span>
           </h2>

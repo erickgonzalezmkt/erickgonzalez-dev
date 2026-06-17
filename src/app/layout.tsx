@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { DM_Sans } from 'next/font/google'
+import { DM_Sans, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 
-// Primary font — DM Sans (clean, modern sans)
+// Primary font — DM Sans (clean, modern sans for body)
 const dmSans = DM_Sans({
   variable: '--font-sans',
   subsets: ['latin'],
@@ -10,15 +10,11 @@ const dmSans = DM_Sans({
   preload: true,
 })
 
-// Headline font — Use a local or CDN premium font for headings
-// Satoshi-like via a variable weight approach. We'll use a bold weight of DM Sans as a fallback,
-// and define --font-heading to use the same but with a distinct weight/style config.
-// For a true "Satoshi" feel, we could import it, but let's keep it performant.
-// Instead, we'll use a bold optical size.
-const headingFont = DM_Sans({
+// Headline font — Space Grotesk (distinctive, tech-forward, variable)
+const headingFont = Space_Grotesk({
   variable: '--font-heading',
   subsets: ['latin'],
-  weight: ['700', '800', '900'],
+  weight: ['500', '600', '700'],
   display: 'swap',
   preload: true,
 })

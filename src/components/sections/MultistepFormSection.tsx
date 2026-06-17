@@ -3,7 +3,6 @@
 import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Check, Loader2, Send } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 
 const steps = [
@@ -150,9 +149,6 @@ export function MultistepFormSection() {
       <div className="relative max-w-lg mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
-          <Badge variant="outline" className="mb-4 border-brand/30 text-brand">
-            Trabajemos juntos
-          </Badge>
           <h2 className="text-4xl sm:text-5xl font-heading font-black tracking-tight text-foreground">
             Cuéntame tu <span className="text-brand">proyecto</span>
           </h2>

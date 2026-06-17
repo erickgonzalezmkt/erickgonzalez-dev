@@ -86,7 +86,7 @@ function CategoryGroup({
 
 export function StackSection() {
   return (
-    <section id="stack" className="relative py-24 overflow-hidden">
+    <section id="stack" className="relative py-24 md:py-28 overflow-hidden">
       {/* Background glow */}
       <div
         className="absolute top-1/3 -left-48 w-[500px] h-[500px] rounded-full bg-brand/5 blur-[140px] pointer-events-none"

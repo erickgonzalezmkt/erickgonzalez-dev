@@ -59,16 +59,15 @@ export function TestimonialsSection() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-brand mb-4">
-            Testimonios
-          </span>
           <h2 className="text-4xl sm:text-5xl font-heading font-black tracking-tight text-foreground">
             Lo que dicen{' '}
             <span className="text-brand">mis clientes</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
-            Resultados reales de negocios reales. Sin humo.
-          </p>
+          <div className="mt-4 flex items-center justify-center gap-3 text-sm text-muted-foreground">
+            <span className="text-brand/60">✦</span>
+            <span>Resultados reales de negocios reales. Sin humo.</span>
+            <span className="text-brand/60">✦</span>
+          </div>
         </motion.div>
 
         {/* Featured testimonial */}
@@ -114,6 +113,7 @@ export function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -4 }}
               className="flex flex-col rounded-xl border border-border-subtle bg-surface/30 p-6 backdrop-blur-sm hover:border-brand/20 transition-all duration-300"
             >
               <StarRating rating={card.rating} />
